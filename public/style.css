@@ -1,0 +1,700 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-gold: #D4AF37;
+    --dark-bg: #0f0f0f;
+    --darker-bg: #000000;
+    --card-bg: #1a1a1a;
+    --border-color: #333333;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-muted: #999999;
+    --success: #4CAF50;
+    --error: #f44336;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-heavy: rgba(0, 0, 0, 0.6);
+    --gold-gradient: linear-gradient(135deg, #D4AF37, #FFD700);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.booking-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--darker-bg);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 🔧 Utility classes */
+.hidden {
+    display: none !important;
+}
+
+/* Header Styling */
+.booking-header {
+    background: var(--darker-bg);
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 2px solid var(--primary-gold);
+    position: relative;
+}
+
+.brand-logo {
+    margin-bottom: 2rem;
+}
+
+.logo-text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: 4px;
+    border: 3px solid var(--primary-gold);
+    padding: 1rem 2rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.logo-subtitle {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-gold);
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.booking-header-content h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.booking-header-content p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+/* Progress Bar */
+.progress-bar {
+    position: relative;
+    margin-top: 2rem;
+}
+
+.progress-fill {
+    height: 3px;
+    background: var(--gold-gradient);
+    width: 33.33%;
+    transition: width 0.5s ease;
+    border-radius: 2px;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.progress-step span {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--border-color);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.progress-step.active span {
+    background: var(--gold-gradient);
+    color: var(--darker-bg);
+}
+
+.progress-step label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.progress-step.active label {
+    color: var(--primary-gold);
+}
+
+/* Steps */
+.step {
+    padding: 3rem 2rem;
+    transition: all 0.4s ease;
+    min-height: 600px;
+}
+
+.step.hidden {
+    display: none;
+}
+
+.step-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.step-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.step-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.service-card:hover::before {
+    left: 100%;
+}
+
+.service-card:hover {
+    border-color: var(--primary-gold);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px var(--shadow-heavy);
+}
+
+.service-card.selected {
+    border-color: var(--primary-gold);
+    background: linear-gradient(135deg, var(--card-bg), rgba(212, 175, 55, 0.1));
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.service-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.service-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-gold);
+    margin: 0.5rem 0;
+}
+
+.service-duration {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.service-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Barbers Grid */
+.barbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.barber-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-height: 400px;
+}
+
+.barber-card:hover {
+    border-color: var(--primary-gold);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px var(--shadow-heavy);
+}
+
+.barber-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--gold-gradient);
+    color: var(--darker-bg);
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.barber-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.barber-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-gold);
+    margin: 0.5rem 0;
+}
+
+.barber-rating {
+    color: var(--primary-gold);
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+}
+
+.barber-specialty {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0.5rem 0;
+}
+
+.available-times {
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.available-times strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.time-slot {
+    background: rgba(212, 175, 55, 0.1);
+    border-left: 3px solid var(--primary-gold);
+    padding: 0.7rem;
+    margin: 0.5rem 0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.time-slot:hover {
+    background: rgba(212, 175, 55, 0.2);
+}
+
+.time-slot.unavailable {
+    background: rgba(244, 67, 54, 0.1);
+    border-left-color: var(--error);
+    color: var(--text-muted);
+}
+
+/* Buttons */
+.back-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    border-color: var(--primary-gold);
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.book-btn {
+    background: var(--gold-gradient);
+    color: var(--darker-bg);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.book-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+}
+
+.book-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.checkout-btn {
+    background: var(--gold-gradient);
+    color: var(--darker-bg);
+    border: none;
+    padding: 1.2rem 3rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.checkout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
+}
+
+/* Selected Info Box */
+.selected-info {
+    background: var(--card-bg);
+    border-left: 4px solid var(--primary-gold);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.selected-info h4 {
+    color: var(--primary-gold);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.selected-info p {
+    color: var(--text-secondary);
+}
+
+/* Loading State */
+.loading-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid var(--border-color);
+    border-top: 4px solid var(--primary-gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 2rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-state p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+/* Error State */
+.error-state {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.error-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--error);
+}
+
+.error-state h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.error-state p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.retry-btn {
+    background: var(--gold-gradient);
+    color: var(--darker-bg);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.retry-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border: 2px solid var(--primary-gold);
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    z-index: 1001;
+    animation: modalSlideIn 0.4s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--success);
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.modal-header h2 {
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.booking-summary {
+    background: var(--darker-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.booking-summary p {
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.booking-summary strong {
+    color: var(--text-primary);
+}
+
+.booking-summary .total {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-gold);
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.modal-note {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .booking-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .logo-text {
+        font-size: 1.8rem;
+        padding: 0.8rem 1.5rem;
+        letter-spacing: 2px;
+    }
+    
+    .booking-header-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .step {
+        padding: 2rem 1rem;
+        min-height: 500px;
+    }
+    
+    .step-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    .services-grid, .barbers-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .service-card, .barber-card {
+        padding: 1.5rem;
+    }
+    
+    .progress-steps {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .progress-step {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+    
+    .progress-step span {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 0;
+    }
+    
+    .modal-content {
+        margin: 1rem;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-header-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .service-card, .barber-card {
+        padding: 1rem;
+    }
+    
+    .barber-card {
+        min-height: 350px;
+    }
+    
+    .service-icon {
+        font-size: 2.5rem;
+    }
+    
+    .barber-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    /* 🔧 Reduce empty space for smaller devices */
+    .step {
+        min-height: 400px;
+    }
+}

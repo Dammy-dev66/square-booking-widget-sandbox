@@ -1,0 +1,20 @@
+{
+  "name": "silver-fox-booking-widget",
+  "version": "1.0.0",
+  "description": "Premium booking widget for Silver Fox Barber Co.",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Static site - no build required'",
+    "start": "echo 'Deploy to Vercel for production'",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "square": "^38.0.0"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "keywords": ["booking", "barbershop", "square", "appointments"],
+  "author": "Silver Fox Barber Co.",
+  "license": "MIT"
+}
